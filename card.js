@@ -2,8 +2,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const puppeteer = require('puppeteer');
 import fetch from 'node-fetch';
-const month = '09';
-const year = '2020';
+
 (async () => {
 	const browser = await puppeteer.launch({headless: false});
 	const page = await browser.newPage();
@@ -19,18 +18,24 @@ const year = '2020';
       await  el[0].click();
 
       await delay(3000);
-      for(let test=0; test<15; test++){
-      await delay(3000);     await page.waitForXPath('//*[@id="programme-header"]/div[3]/div[1]');
-    let el2= await page.$x('//*[@id="programme-header"]/div[3]/div[1]');
-    el2[0].click();
+      let text3="";
 
+      await delay(3000);     await page.waitForXPath('//*[@id="mobile-navbar"]/div[1]');
+    let elbisbis= await page.$x('//*[@id="mobile-navbar"]/div[1]');
+    elbisbis[0].click();
+    
+      for(let test=0; test<15; test++){
+      await delay(3000);     await page.waitForXPath('/html/body/div[1]/div/div[3]/div/div[2]/div[2]/div/div[1]/div/div/div[1]/div[3]/div[1]');
+    let el2= await page.$x('/html/body/div[1]/div/div[3]/div/div[2]/div[2]/div/div[1]/div/div/div[1]/div[3]/div[1]');
+    el2[0].click();
+   
  
     await delay(3000);     
  
   await page.waitForXPath('//*[@id="programme-title"]/div[2]');
   //assuming it's the first element
   let [element] = await page.$x('//*[@id="programme-title"]/div[2]');
-   let text3= await page.evaluate(element => element.textContent, element);
+    text3+= await page.evaluate(element => element.textContent, element);
 
       await delay(3000);
 
@@ -58,8 +63,7 @@ text+=";";
       text2= await page.evaluate(element2 => element2.textContent, element2);*/
        
   
-
-   
+   /*
      let el4= await page.$x('//*[@id="__next"]/div/div[3]/div/div[1]/div/div/div/div[1]/div');
      await  el4[0].click();
      await delay(3000);
@@ -78,11 +82,11 @@ text+=";";
     );
     const resbis = await response.json();
 
-
+*/
 
 
      
-     console.log(resbis+text3+":"+text);
+     console.log(text3+":"+text);
     }
      /*  
     await page.waitForSelector('#ProductSearchInput');
