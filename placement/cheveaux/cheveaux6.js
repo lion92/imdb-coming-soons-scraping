@@ -21,7 +21,7 @@ let rep="";
   let elcale = await page.$x('//*[@id="ProgrammeCalendar/Button"]');
   await elcale[0].click();
 
- for(let k=0; k<11; k++){  
+ for(let k=0; k<6; k++){  
   try{
    await delay(1200);
   await page.waitForXPath('//*[@id="programme-header"]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/div[1]');
