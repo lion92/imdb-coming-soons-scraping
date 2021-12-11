@@ -21,12 +21,23 @@ const puppeteer = require("puppeteer");
   let el2 = await page.$x('//*[@id="calendar1"]');
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[7]
   await el2[0].click();
+
+  for (let i = 0; i < 2; i++) {
+    await delay(1200);
+    await page.waitForXPath(
+      '//*[@id="page-content"]/div[1]/div/div/div[1]/div/table/thead/tr/td[1]'
+    );
+
+    let el3 = await page.$x(
+      '//*[@id="page-content"]/div[1]/div/div/div[1]/div/table/thead/tr/td[1]'
+    );
+
+    await el3[0].click();
+  }
   await delay(1200);
 
-
-  
   for (let i = 2; i < 7; i++) {
-    for (let j = 1; j < 7; j++) {
+    for (let j = 1; j < 8; j++) {
       try {
         await delay(1200);
 
@@ -51,11 +62,99 @@ const puppeteer = require("puppeteer");
         );
 
         console.log(text3);
+
+        if (text3 === "12") {
+          await delay(1200);
+          await page.waitForXPath(
+            '//*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[' +
+              i +
+              "]/td[" +
+              j +
+              "]"
+          );
+
+          let el4 = await page.$x(
+            '//*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[' +
+              i +
+              "]/td[" +
+              j +
+              "]"
+          );
+
+          await el4[0].click();
+          await delay(1200);
+          i=9;  
+          j=9;
+          break;
+
+        }
       } catch (error) {
         console.log(error);
       }
     }
   }
+  await delay(1200);
+  await page.waitForXPath(
+    "//*[@id='acd-0']/div/div/li[1]/div/div[3]/div/a[1]"
+  );
+  /////////////////////////////////
+
+  
+  await delay(1200);
+  let el6 = await page.$x(
+    "//*[@id='acd-0']/div/div/li[1]/div/div[3]/div/a[1]"
+  );
+
+  await el6[0].click();
+
+
+          try{
+  await delay(1200);
+
+  await page.waitForXPath(
+    "//*[@id='tab-prono-ct']/div[5]"
+  );
+
+  let [element4] = await page.$x(
+    "//*[@id='tab-prono-ct']/div[5]"
+  );
+  let text4 = await page.evaluate(
+    (element4) => element4.textContent,
+    element4
+  );
+
+  console.log(text4);
+          }catch(error){
+              console.log(error);
+          }
+
+console.log("fin2");
+  //////////////////////////////////////////////////
+
+  
+
+
+//*[@id="tab-prono-ct"]/div[5]/div[1]/table/tbody/tr[2]/td[1]
+
+
+//*[@id="tab-prono-ct"]/div[5]/div[2]/table/tbody/tr[1]/td[1]
+
+//*[@id="tab-prono-ct"]/div[5]/div[2]/table/tbody/tr[2]/td[1]
+
+
+//*[@id="tab-prono-ct"]/div[5]/div[2]/table/tbody/tr[3]/td[1]
+
+//*[@id="tab-prono-ct"]/div[5]/div[3]/table/tbody/tr[1]/td[1]
+
+//*[@id="tab-prono-ct"]/div[5]/div[3]/table/tbody/tr[2]/td[1]
+
+//*[@id="tab-prono-ct"]/div[5]/div[3]/table/tbody/tr[3]/td[1]
+
+
+
+
+  console.log("fin");
+
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[1]
 
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[1]
