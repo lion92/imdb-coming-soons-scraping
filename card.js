@@ -13,7 +13,7 @@ import fetch from 'node-fetch';
     // evaluate XPath expression of the target selector (it return array of ElementHandle)
     
 
-    await page.waitForXPath('//*[@id="axeptio_overlay"]/div/div/div[1]');
+    await page.waitForXPath('');
     let el= await page.$x('//*[@id="axeptio_overlay"]/div/div/div[1]');
       await  el[0].click();
 

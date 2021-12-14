@@ -5,18 +5,22 @@ const puppeteer = require("puppeteer");
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto(`https://www.canalturf.com/courses_archives.php`);
+  for(let i=0; i<4; i++){
+      let num=i*20;
   await delay(3000);
-
+  await page.goto('https://www.turfomania.fr/pronostics/quintes.php?start='+num);
+  await delay(5000);
+if(!i>=1){
   await page.waitForXPath(
-    '//*[@id="sd-cmp"]/div[2]/div[1]/div/div/div/div/div/div[2]/div[2]/button[2]'
+    '//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]'
   );
   let el = await page.$x(
-    '//*[@id="sd-cmp"]/div[2]/div[1]/div/div/div/div/div/div[2]/div[2]/button[2]'
+    '//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]'
   );
   await el[0].click();
+}
   await delay(600);
-
+/*
   await page.waitForXPath('//*[@id="calendar1"]');
   let el2 = await page.$x('//*[@id="calendar1"]');
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[7]
@@ -128,27 +132,28 @@ for(let g=1; g<9;g++){
       console.log(error);
   }
           try{
+
+*/
+
+  
   await delay(3000);
-
   await page.waitForXPath(
-    "//*[@id='tab-prono-ct']/div[5]"
+    "//*[@id='tableauId']"
   );
 
-  let [element4] = await page.$x(
-    "//*[@id='tab-prono-ct']/div[5]"
+  let [element6] = await page.$x(
+    "//*[@id='tableauId']"
   );
-  let text4 = await page.evaluate(
-    (element4) => element4.textContent,
-    element4
+  let text6 = await page.evaluate(
+    (element6) => element6.textContent,
+    element6
   );
+  console.log(text6.replace(/[ ]/g,''));
+  
+  
 
-  console.log(text4);
-          }catch(error){
-              console.log(error);
-          }
-        }
 
-console.log("fin2");
+
   //////////////////////////////////////////////////
 
   
@@ -173,13 +178,13 @@ console.log("fin2");
 
 
 
-  console.log("fin");
-
+  
+  }
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[1]
 
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[1]
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[4]
-  //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[6]/td[6]
+  //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[6]/td[6]*/
 })();
 function delay(time) {
   return new Promise(function (resolve) {
