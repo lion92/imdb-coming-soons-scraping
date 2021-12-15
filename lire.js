@@ -13,21 +13,25 @@ fs.readFile("", function (err, data) {
     .on("end", function () {
       // console.log(data2);
 
-      let tab = data2.split(/\n/g);
-      tab.forEach((element) => {
-        if (element.includes("-")) {
-          element = element.replace(/[ ]/g, "");
-          let elementtab = element.split("-");
+      let tab = data2.split(/\n/g); 
+       let y=1;
+
           let i = 0;
-          for (let ele of elementtab) {
-            if (isNaN(elementtab[0])) {
-              if (new RegExp("[^a-z^A-Z|]", "g").test(ele)) {
-                console.log(ele);
-              }
-            }
-            i++;
+      tab.forEach((element) => {
+
+        element=element.replace(/[ ]/g,"");
+
+       if(element!==""&&new RegExp("([0-9][0-9]||[0-9])","g").test(element)&&!new RegExp("([a-zA-Z])","g").test(element)){
+          console.log(element);
+            fs.appendFile("C:\\Users\\kriss\\Documents\\essai2\\testpourdede"+i+".txt", element, function (err) {
+              if (err) throw err;
+           //   console.log('The "data to append" was appended to file!');
+        
+            });
           }
-        }
-      });
+          i++;
+        })
+      
+     
     });
 });
