@@ -5,7 +5,8 @@ const puppeteer = require("puppeteer");
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  for(let i=0; i<4; i++){
+  for(let i=0; i<200; i++){
+    try{
       let num=i*20;
   await delay(3000);
   await page.goto('https://www.turfomania.fr/pronostics/quintes.php?start='+num);
@@ -177,7 +178,9 @@ for(let g=1; g<9;g++){
 
 
 
-
+  }catch(error){
+    
+  }
   
   }
   //*[@id="page-content"]/div[1]/div/div/div[1]/div/table/tbody/tr[2]/td[1]

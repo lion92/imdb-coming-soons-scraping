@@ -1,8 +1,9 @@
 import * as fs from "fs";
 
 fs.readFile("", function (err, data) {
+  let str="";
   var readStream = fs.createReadStream(
-    "C:\\Users\\kriss\\Documents\\testpourdede.txt",
+    "C:\\Users\\kriss\\Documents\\ligneprono.txt",
     "utf8"
   );
   let data2 = "";
@@ -22,15 +23,23 @@ fs.readFile("", function (err, data) {
         element=element.replace(/[ ]/g,"");
 
        if(element!==""&&new RegExp("([0-9][0-9]||[0-9])","g").test(element)&&!new RegExp("([a-zA-Z])","g").test(element)){
-          console.log(element);
-            fs.appendFile("C:\\Users\\kriss\\Documents\\essai2\\testpourdede"+i+".txt", element, function (err) {
-              if (err) throw err;
-           //   console.log('The "data to append" was appended to file!');
+        let tabele=element.split("-"); 
+     
+        if(element.length>=15){ 
         
-            });
+      
+        str+="insert into combinaison (pronostic, numero, premier, deuxieme, troisieme, quatrieme, cinquieme) values('"+element+"', '"+i+"','"+tabele[0]+"','"+tabele[1]+"','"+tabele[2]+"','"+tabele[3]+"','"+tabele[4]+"');";
+  
+         
+          }else{
+            --i;
+            str+="insert into resultat (pronostic, numero, premier, deuxieme, troisieme, quatrieme, cinquieme) values('"+element+"', '"+i+"','"+tabele[0]+"','"+tabele[1]+"','"+tabele[2]+"','"+tabele[3]+"','"+tabele[4]+"');";
+            
+          } 
           }
-          i++;
+            i++;
         })
+        console.log(str);
       
      
     });
